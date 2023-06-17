@@ -2,7 +2,7 @@
 
 ## About
 
-This is an project for the class of web design of the professor Alessio Vecchio at the University of Pisa, Italy.
+This is a project for the class of web design of the professor Alessio Vecchio at the University of Pisa, Italy.
 
 ---
 
