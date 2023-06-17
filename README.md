@@ -1,7 +1,10 @@
 # CODFISH 2000
 
 ## About
-This is an University of Pisa project for the class of web design of the professor Alessio Vecchio.
+
+This is an project for the class of web design of the professor Alessio Vecchio at the University of Pisa, Italy.
+
+---
 
 **Codfish 2000** is a javascript chess engine:
 
