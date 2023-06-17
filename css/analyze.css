@@ -1,0 +1,173 @@
+
+/**
+ * Right menu
+ */
+
+.analysis-settings-container, .load-analysis-container {
+    position: relative;
+    background-color: #2B2B2B;
+    padding: 5px;
+    margin-left: 10px;
+    width: 300px;
+    height: calc(var(--SQUARE-SIZE) * 8);
+}
+
+.fen-container {
+    width: 95%;
+}
+
+.fen {
+    margin-top: 5px;
+    width: 100%;
+    resize: none;
+}
+
+.opening-book-checkbox {
+    height: 20px;
+    width: 20px;
+    margin-left: 10px;
+}
+
+table {
+    text-align: left;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+tbody tr:nth-of-type(even) {
+    background-color: #474747;
+}
+
+tbody tr:nth-of-type(odd) {
+    background-color: #383838;
+}
+
+td {
+    line-height: 2rem;
+    padding-left: 5px;
+}
+
+.engine-output {
+    color: #FFDBAD;
+}
+
+.button {
+    margin-bottom: 5px;
+}
+
+.analysis-button {
+    background-color: #83654A;
+}
+
+.analysis-button:hover {
+    background-color: #E29365;
+}
+
+.analysis-button:disabled {
+    background-color: #525253;
+}
+
+.manage-analysis-text {
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.save-analysis-button {
+    width: 200px;
+}
+
+
+
+/**
+ * Database output
+ */
+
+.load-analysis-container {
+    display: none;
+}
+
+.database-output-container {
+    overflow: auto;
+    display: block;
+    height: calc(var(--SQUARE-SIZE) * 6.5);
+    width: 100%;
+}
+
+.database-output-left {
+    height: 100%;
+    width: 80%;
+    padding-left: 5px;
+    align-items: baseline;
+}
+
+.database-output-left:hover {
+    cursor: pointer;
+    background-color: #ffffff;
+}
+
+.database-output {
+    background-color: #cccccc;
+    width: 95%;
+    height: 15%;
+    margin: 2.5%;
+    border: 2px solid #FFFFFF;
+}
+
+.database-output-name {
+    pointer-events: none;
+    color: #53381f;
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    overflow: auto;
+    width: 100%;
+}
+
+.database-output-time {
+    pointer-events: none;
+    color: #000000;
+    font-size: 0.9rem;
+}
+
+.database-output-delete {
+    background-image: url('../media/delete.svg'); 
+    background-size: 50px;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 20%;
+    height: 100%;
+}
+
+.database-output-delete:hover {
+    background-color: #aa4c49;
+    cursor: pointer;
+}
+
+
+
+/**
+ * Popups
+ */
+
+.popup-container {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    display: none;
+}
+
+.popup {
+    background-color: #636569;
+    border: 5px solid black;
+    z-index: 3;
+}
+
+.download-opening-book {
+    display: none;
+}
+
+.download-opening-book-text {
+    text-shadow: 1px 1px 1px #000000;
+}

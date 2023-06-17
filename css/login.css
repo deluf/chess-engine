@@ -1,0 +1,23 @@
+
+.input-field {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    width: 300px;
+    margin-bottom: 20px;
+    border: 2px solid #000000;
+
+}
+
+label {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.submit {
+    width: 300px;
+    margin-top: 20px;
+}
+
+.wrong-field {
+    background-color: #DB6666;
+}
