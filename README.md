@@ -31,3 +31,5 @@ In particular, the website has been tested on:
 * XAMPP 8.0.10 (Apache 2.4.48, PHP 8.0.10, MySQL 5.7.28)
 * Chrome 94.0.4606.61
 * Firefox 92.0.1
+
+Remember to first run the build_database.sql script!
