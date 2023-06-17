@@ -56,9 +56,9 @@ Remember to first run the build_database.sql script!
 
 ## Gallery
 
-<img src="Screenshots/1-Index.png" width="500">
-<img src="Screenshots/2-Login.png" width="500">
-<img src="Screenshots/3-Play.png" width="500">
-<img src="Screenshots/4-Play_white_wins.png" width="500">
-<img src="Screenshots/5-Load_analysis.png" width="500">
-<img src="Screenshots/6-Analyze.png" width="500">
+<img src="Screenshots/1-Index.png" width="800">
+<img src="Screenshots/2-Login.png" width="800">
+<img src="Screenshots/3-Play.png" width="800">
+<img src="Screenshots/4-Play_white_wins.png" width="800">
+<img src="Screenshots/6-Analyze.png" width="800">
+<img src="Screenshots/5-Load_analysis.png" width="800">
