@@ -1,6 +1,8 @@
 # CODFISH 2000
 
 ## About
+This is an University of Pisa project for the class of web design of the professor Alessio Vecchio.
+
 **Codfish 2000** is a javascript chess engine:
 
 *   The name _'Codfish'_ is inspired by the famous chess engine [stockfish](https://stockfishchess.org/).
