@@ -43,22 +43,31 @@ This is a project for the class of web design of the professor Alessio Vecchio a
 
 ## Setup
 
-To run the website, you will need any HTTP web server with PHP support and a MySQL server.
-
-In particular, the website has been tested on:
-* XAMPP 8.0.10 (Apache 2.4.48, PHP 8.0.10, MySQL 5.7.28)
-* Chrome 94.0.4606.61
-* Firefox 92.0.1
-
-Remember to first run the build_database.sql script!
+<ol>
+  <li>
+    First of all you will need any HTTP web server with PHP support and a MySQL server. 
+    <br>In particular, the website has been tested on:
+    <ul>
+      <li>XAMPP 8.0.10 (Apache 2.4.48 - PHP 8.0.10 - MySQL 5.7.28)</li>
+      <li>Chrome 94.0.4606.61</li>
+      <li>Firefox 92.0.1</li>
+    </ul>
+  </li>
+  <li>
+    Build the database using <a href="build_database.sql">build_database.sql</a>
+  </li>
+  <li>
+    Edit the database configuration <a href="php/config.php">php/config.php</a>
+  </li>
+</ol>
 
 
 
 ## Gallery
 
-<img src="Screenshots/1-Index.png" width="800">
-<img src="Screenshots/2-Login.png" width="800">
-<img src="Screenshots/3-Play.png" width="800">
-<img src="Screenshots/4-Play_white_wins.png" width="800">
-<img src="Screenshots/6-Analyze.png" width="800">
-<img src="Screenshots/5-Load_analysis.png" width="800">
+<img src="screenshots/index.png" width="800">
+<img src="screenshots/login.png" width="800">
+<img src="screenshots/play.png" width="800">
+<img src="screenshots/play_white_wins.png" width="800">
+<img src="screenshots/load_analysis.png" width="800">
+<img src="screenshots/analyze.png" width="800">
