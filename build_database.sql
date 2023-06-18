@@ -1,10 +1,12 @@
--- Progettazione Web 
-DROP DATABASE if exists delucchini_635502; 
-CREATE DATABASE delucchini_635502; 
-USE delucchini_635502; 
+
+-- The database contains one user, with both username and password 'user', and a few test positions.
+
+DROP DATABASE if exists codfish_2000; 
+CREATE DATABASE codfish_2000; 
+USE codfish_2000; 
 -- MySQL dump 10.13  Distrib 5.7.28, for Win64 (x86_64)
 --
--- Host: localhost    Database: delucchini_635502
+-- Host: localhost    Database: codfish_2000
 -- ------------------------------------------------------
 -- Server version	5.7.28
 

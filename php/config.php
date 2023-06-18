@@ -2,12 +2,14 @@
 
 namespace Config;
 
+# Database configuration
 const dbHost = "127.0.0.1";
-const dbName = "delucchini_635502";
-const dbUsername = "root";
-const dbPassword = "";
+const dbName = "codfish_2000";
+const dbUsername = "user";
+const dbPassword = "user";
 const dbConnectionString = "mysql:host=".dbHost.";dbname=".dbName;
 
+# PHP session variables
 const loggedUsername = "loggedUsername";
 
 ?>
