@@ -1,4 +1,7 @@
-# CODFISH 2000
+<div align="center">
+  <h1>CODFISH 2000</h1>
+  <img src="media/logo.webp">
+</div>
 
 ## About
 
