@@ -281,164 +281,167 @@ class Game {
 */
 Game.prototype.parseFEN = function(FEN) {
 
-   if (!VALIDATE_FEN.test(FEN)) {
-       window.alert('Invalid FEN: bad pattern');
-       FEN = STARTING_FEN;
-   }
+    if (!VALIDATE_FEN.test(FEN)) {
+        window.alert('Invalid FEN: bad pattern');
+        FEN = STARTING_FEN;
+    }
 
-   /**
-    * Additional information used by the engine
-    */
-   if (FEN != STARTING_FEN) {
-       this.is_in_book_theory = false;
-   }
-   else {
-       this.is_in_book_theory = true;
-   }
-   this.book_move_history = [];
-   this.status = STATUS.ONGOING;
-
-
-   /**
-    * The chessboard is internally represented using 120 squares instead of 64,
-    * this makes move generation much easier: imagine a kinght on square
-    * 91, it can reach squares [72, 83, 103, 112, 110, 99, 79, 70]:
-    * just by looking at the numbers we already know which ones are
-    * inside of the board and which are not.
-    * 
-    *  __ __ __ __ __ __ __ __ __ __
-    * |                             | 0 .. 9
-    * |   __ __ __ __ __ __ __ __   | 10 .. 19
-    * |  |21 22 23 24 25 26 27 28|  |
-    * |  |31 32 33 34 35 36 37 38|  |
-    * |  |41 42 43 44 45 46 47 48|  |
-    * |  |51 52 53 54 55 56 57 58|  |
-    * |  |61 62 63 64 65 66 67 68|  |
-    * |  |71 72 73 74 75 76 77 78|  |
-    * |  |81 82 83 84 85 86 87 88|  |
-    * |  |91 92 93 94 95 96 97 98|  |
-    * |   A  B  C  D  E  F  G  H    | 100 .. 100
-    * |__ __ __ __ __ __ __ __ __ __| 110 .. 119
-    *  
-    */
-   this.chessboard = new Array(120);
-   this.chessboard.fill(PIECES.EMPTY);
+    /**
+        * Additional information used by the engine
+        */
+    if (FEN != STARTING_FEN) {
+        this.is_in_book_theory = false;
+    }
+    else {
+        this.is_in_book_theory = true;
+    }
+    this.book_move_history = [];
+    this.status = STATUS.ONGOING;
 
 
-   /**
-    * Used to keep track of the position of the kings
-    * without having to loop the entire board.
-    */
-   this.white_king_square = DUMMY_SQUARE;
-   this.black_king_square = DUMMY_SQUARE;
+    /**
+        * The chessboard is internally represented using 120 squares instead of 64,
+        * this makes move generation much easier: imagine a kinght on square
+        * 91, it can reach squares [72, 83, 103, 112, 110, 99, 79, 70]:
+        * just by looking at the numbers we already know which ones are
+        * inside of the board and which are not.
+        * 
+        *  __ __ __ __ __ __ __ __ __ __
+        * |                             | 0 .. 9
+        * |   __ __ __ __ __ __ __ __   | 10 .. 19
+        * |  |21 22 23 24 25 26 27 28|  |
+        * |  |31 32 33 34 35 36 37 38|  |
+        * |  |41 42 43 44 45 46 47 48|  |
+        * |  |51 52 53 54 55 56 57 58|  |
+        * |  |61 62 63 64 65 66 67 68|  |
+        * |  |71 72 73 74 75 76 77 78|  |
+        * |  |81 82 83 84 85 86 87 88|  |
+        * |  |91 92 93 94 95 96 97 98|  |
+        * |   A  B  C  D  E  F  G  H    | 100 .. 100
+        * |__ __ __ __ __ __ __ __ __ __| 110 .. 119
+        *  
+        */
+    this.chessboard = new Array(120);
+    this.chessboard.fill(PIECES.EMPTY);
 
 
-   FEN = FEN.split(' ');
-
-   this.to_play = (FEN[1] == 'w') ? PLAYERS.WHITE : PLAYERS.BLACK;
-
-   /**
-    * The square behind the pawn that can be captured by an en-passant move.
-    */
-   this.en_passant = (FEN[3] == '-') ? DUMMY_SQUARE : FRto120(...FEN[3]);
-
-   /**
-    * Number of single moves (both white and black) since the last capture
-    * or pawn push, it's used apply the 50 move rule (when this number reaches
-    * 100 the game ends in a forced draw).
-    */   
-   this.half_moves = parseInt(FEN[4]);
-
-   /**
-    * Number of moves in a game, increments each time black moves.
-    */   
-   this.moves = parseInt(FEN[5]);
-
-   // Parse of FEN[0]: Position of the pieces
-   let row = 0;
-   let column = 0;
-   for (let char of FEN[0]) {
-
-       if (char == '/') {
-           column = 0;
-           row++;
-           continue;
-       }
-
-       if (column >= 8) {
-           window.alert('Invalid FEN: too many spaces or pieces in a single row');
-           // Basically calls the constructor again but with the default argument STARTING_FEN
-           parseFEN();
-           return;
-       }
-
-       if (!isNumber(char)) {
-           this.chessboard[RCto120(row, column)] = PIECES[char];
-
-           if (char == 'k') {
-               this.black_king_square = RCto120(row, column);
-           }
-           else if (char == 'K') {
-               this.white_king_square = RCto120(row, column);
-           }
-
-           column++;
-           continue;
-       }
-
-       for (;char > 0; char--) {
-           column++;
-       }
-   }
-
-   if (this.white_king_square == DUMMY_SQUARE || this.black_king_square == DUMMY_SQUARE) {
-       window.alert('Invalid FEN: there are no kings');
-       parseFEN();
-       return;
-   }
+    /**
+        * Used to keep track of the position of the kings
+        * without having to loop the entire board.
+        */
+    this.white_king_square = DUMMY_SQUARE;
+    this.black_king_square = DUMMY_SQUARE;
 
 
-   /**
-    * Parse of FEN[2]: Castling rights (4 bit binary flag):
-    * - 1st bit: White king's side castling right
-    * - 2nd bit: White queen's side castling right
-    * - 3rd bit: Black king's side castling right
-    * - 4th bit: Black queen's side castling right
-    */
-   this.castling_rights = CASTLING_MOVES.NONE;
-   let error_message = '';
-   for (let char of FEN[2]) {   
+    FEN = FEN.split(' ');
 
-       if (char == 'K') {
-           if (this.chessboard[95] != PIECES.K || this.chessboard[98] != PIECES.R) {
-               error_message = 'Invalid FEN: white king\'s side castling is incompatible with the position of the pieces';
-           }
-           this.castling_rights |= CASTLING_MOVES.WHITE_KING_SIDE;
-       }
+    this.to_play = (FEN[1] == 'w') ? PLAYERS.WHITE : PLAYERS.BLACK;
 
-       else if (char == 'Q') {
-           if (this.chessboard[95] != PIECES.K || this.chessboard[91] != PIECES.R)
-               error_message = 'Invalid FEN: white queen\'s side castling is incompatible with the position of the pieces';
-           this.castling_rights |= CASTLING_MOVES.WHITE_QUEEN_SIDE;
-       }
+    /**
+        * The square behind the pawn that can be captured by an en-passant move.
+        */
+    this.en_passant = (FEN[3] == '-') ? DUMMY_SQUARE : FRto120(...FEN[3]);
 
-       else if (char == 'k') {
-           if (this.chessboard[25] != PIECES.k || this.chessboard[28] != PIECES.r)
-               error_message = 'Invalid FEN: black king\'s side castling is incompatible with the position of the pieces';
-           this.castling_rights |= CASTLING_MOVES.BLACK_KING_SIDE;
-       }
+    /**
+        * Number of single moves (both white and black) since the last capture
+        * or pawn push, it's used apply the 50 move rule (when this number reaches
+        * 100 the game ends in a forced draw).
+        */   
+    this.half_moves = parseInt(FEN[4]);
 
-       else if (char == 'q') {
-           if (this.chessboard[25] != PIECES.k || this.chessboard[21] != PIECES.r)
-               error_message = 'Invalid FEN: black queen\'s side castling is incompatible with the position of the pieces';
-           this.castling_rights |= CASTLING_MOVES.BLACK_QUEEN_SIDE;
-       }
+    /**
+        * Number of moves in a game, increments each time black moves.
+        */   
+    this.moves = parseInt(FEN[5]);
 
-   }
-   if (error_message != '') {
-       window.alert(error_message);
-       parseFEN();
-   }
+    // Parse of FEN[0]: Position of the pieces
+    let row = 0;
+    let column = 0;
+    for (let char of FEN[0]) {
+
+        if (char == '/') {
+            column = 0;
+            row++;
+            continue;
+        }
+
+        if (column >= 8) {
+            window.alert('Invalid FEN: too many spaces or pieces in a single row');
+            // Basically calls the constructor again but with the default argument STARTING_FEN
+            this.parseFEN(STARTING_FEN);
+            return;
+        }
+
+        if (!isNumber(char)) {
+            this.chessboard[RCto120(row, column)] = PIECES[char];
+
+            if (char == 'k') {
+                this.black_king_square = RCto120(row, column);
+            }
+            else if (char == 'K') {
+                this.white_king_square = RCto120(row, column);
+            }
+
+            column++;
+            continue;
+        }
+
+        for (;char > 0; char--) {
+            column++;
+        }
+    }
+
+    if (this.white_king_square == DUMMY_SQUARE || this.black_king_square == DUMMY_SQUARE) {
+        window.alert('Invalid FEN: there are no kings');
+        this.parseFEN(STARTING_FEN);
+        return;
+    }
+
+
+    /**
+        * Parse of FEN[2]: Castling rights (4 bit binary flag):
+        * - 1st bit: White king's side castling right
+        * - 2nd bit: White queen's side castling right
+        * - 3rd bit: Black king's side castling right
+        * - 4th bit: Black queen's side castling right
+        */
+    this.castling_rights = CASTLING_MOVES.NONE;
+    let error_message = '';
+    for (let char of FEN[2]) {   
+
+        if (char == 'K') {
+            if (this.chessboard[95] != PIECES.K || this.chessboard[98] != PIECES.R) {
+                error_message = 'Invalid FEN: white king\'s side castling is incompatible with the position of the pieces';
+            }
+            this.castling_rights |= CASTLING_MOVES.WHITE_KING_SIDE;
+        }
+
+        else if (char == 'Q') {
+            if (this.chessboard[95] != PIECES.K || this.chessboard[91] != PIECES.R) {
+                error_message = 'Invalid FEN: white queen\'s side castling is incompatible with the position of the pieces';
+            }
+            this.castling_rights |= CASTLING_MOVES.WHITE_QUEEN_SIDE;
+        }
+
+        else if (char == 'k') {
+            if (this.chessboard[25] != PIECES.k || this.chessboard[28] != PIECES.r) {
+                error_message = 'Invalid FEN: black king\'s side castling is incompatible with the position of the pieces';
+            }
+            this.castling_rights |= CASTLING_MOVES.BLACK_KING_SIDE;
+        }
+
+        else if (char == 'q') {
+            if (this.chessboard[25] != PIECES.k || this.chessboard[21] != PIECES.r) {
+                error_message = 'Invalid FEN: black queen\'s side castling is incompatible with the position of the pieces';
+            }
+            this.castling_rights |= CASTLING_MOVES.BLACK_QUEEN_SIDE;
+        }
+
+    }
+    if (error_message != '') {
+        window.alert(error_message);
+        this.parseFEN(STARTING_FEN);
+    }
 
 }
 
