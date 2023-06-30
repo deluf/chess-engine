@@ -64,14 +64,14 @@ if(session_status() == PHP_SESSION_NONE) {
                     <span class="main-button-text">
                         Play against<br>the CPU
                     </span>
-                    <img class="main-button-icon" src="../media/play.svg" alt="CPU icon">
+                    <img class="main-button-icon" src="media/play.svg" alt="CPU icon">
                 </a>
         
                 <a href="php/analyze.php" class="main-button container-column">
                     <span class="main-button-text">
                         Analyze<br>position
                     </span>
-                    <img class="main-button-icon" src="../media/analyze.svg" alt="Search lens icon">
+                    <img class="main-button-icon" src="media/analyze.svg" alt="Search lens icon">
                 </a>
 
             </div>
