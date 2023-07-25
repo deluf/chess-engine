@@ -5,7 +5,7 @@
 
 ## About
 
-This is a project for the 2022-2023 class of web design of the professor Alessio Vecchio at the University of Pisa (Italy).
+This is a project for the 2022-2023 class of web development of the professor Alessio Vecchio at the University of Pisa (Italy).
 
 ---
 
